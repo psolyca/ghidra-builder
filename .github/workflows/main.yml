@@ -80,7 +80,7 @@ jobs:
           arguments: --console plain --quiet buildGhidra
       
       - name: "Upload package"
-        uses: psolyca/ghidra-builder@nightly
+        uses: NyaMisty/upload-artifact@nightly
         with:
           name: "Ghidra_${{ matrix.ghidra.version }}_${{ matrix.platform.os }}"
           path: "ghidra/build/dist/*.zip"
