@@ -66,21 +66,21 @@ jobs:
           # An explicit key for restoring and saving the cache
           key: "${{ matrix.ghidra.version }}-${{ matrix.platform.os }}-ghdepends"
       - name: "Fetch dependencies"
-        uses: eskatos/gradle-command-action@v1
+        uses: eskatos/gradle-command-action@v1.4.0
         with:
           build-root-directory: ghidra
           gradle-version: ${{ env.GRADLE_VERSION }}
-          arguments: --console plain --quiet --init-script gradle/support/fetchDependencies.gradle init
+          arguments: --console plain --quiet --init-script gradle/support/fetchDependencies.gradle
       
       - name: "Building Ghidra ${{ matrix.ghidra.version }} from ${{ matrix.ghidra.ref }}"
-        uses: eskatos/gradle-command-action@v1
+        uses: eskatos/gradle-command-action@v1.4.0
         with:
           build-root-directory: ghidra
           gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: --console plain --quiet buildGhidra
       
       - name: "Upload package"
-        uses: NyaMisty/upload-artifact@nightly
+        uses: psolyca/ghidra-builder@nightly
         with:
           name: "Ghidra_${{ matrix.ghidra.version }}_${{ matrix.platform.os }}"
           path: "ghidra/build/dist/*.zip"
